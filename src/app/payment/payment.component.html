@@ -1,0 +1,114 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="panel panel-primary">
+      <div class="panel-heading">Payment details</div>
+      <div class="panel-body">
+          <div class="form-group">
+              <label for="bsb">BSB</label>
+              <input
+              formControlName="bsb"
+              type="text"
+              class="form-control"
+              id="bsb"
+              placeholder="123-456">
+
+              <div *ngIf="bsb.invalid && bsb.touched">
+                  <div *ngIf="bsb.errors.required" class="alert alert-danger">
+                     Please enter BSB
+                  </div>
+                  <div *ngIf="bsb.errors.minlength || bsb.errors.maxlength || bsb.errors.pattern" class="alert alert-danger">
+                     BSB format is incorrect
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="accountNumber">Account Number</label>
+              <input
+              formControlName="accountNumber"
+              type="number"
+              class="form-control"
+              id="accountNumber"
+              placeholder="">
+
+              <div *ngIf="accountNumber.invalid && accountNumber.touched">
+                  <div *ngIf="accountNumber.errors.required" class="alert alert-danger">
+                     Please enter account number
+                  </div>
+                  <div *ngIf="accountNumber.errors.minlength || accountNumber.errors.maxlength" class="alert alert-danger">
+                     Please enter an account number between 6 to 10 digits
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="accountName">Account Name</label>
+              <input
+              formControlName="accountName"
+              type="text"
+              class="form-control"
+              id="accountName"
+              placeholder="">
+
+              <div *ngIf="accountName.invalid && accountName.touched">
+                  <div *ngIf="accountName.errors.required" class="alert alert-danger">
+                     Please enter account name
+                  </div>
+                  <div *ngIf="accountName.errors.maxlength || accountName.errors.minLength" class="alert alert-danger">
+                      Please enter an account name between 2 to 50 characters
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="reference">Reference</label>
+              <input
+              formControlName="reference"
+              type="text"
+              class="form-control"
+              id="reference"
+              placeholder="">
+
+              <div *ngIf="reference.invalid && reference.touched">
+                  <div *ngIf="reference.errors.maxlength" class="alert alert-danger">
+                      Please enter a reference less than 50 characters
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="Amount">Amount</label>
+              <input
+              formControlName="Amount"
+              type="number"
+              class="form-control"
+              id="Amount"
+              placeholder="">
+
+              <div *ngIf="Amount.invalid && Amount.touched">
+                  <div *ngIf="Amount.errors.required" class="alert alert-danger">
+                     Please enter amount
+                  </div>
+                  <div *ngIf="Amount.errors.maxlength" class="alert alert-danger">
+                      Please enter an amount less than 11 digits
+                  </div>
+                  <div *ngIf="Amount.errors.min" class="alert alert-danger">
+                      Please enter an amount more than 0
+                  </div>
+              </div>
+          </div>
+
+          <button
+           class="btn btn-primary"
+           (submit)="onSubmit()"
+           [disabled]="!form.valid">
+           Save
+          </button>
+
+      </div>
+  </div>
+
+  <div *ngIf="message!==''" class="alert alert-success">
+    {{ message }}
+  </div>
+
+  <div *ngIf="errorMessage!==''" class="alert alert-danger">
+      {{ errorMessage }}
+  </div>
+
+</form>
